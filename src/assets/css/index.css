@@ -1,0 +1,9 @@
+.number-container {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid black;
+
+  margin: 10px;
+}
