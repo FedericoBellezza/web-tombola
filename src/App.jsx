@@ -8,35 +8,48 @@ function App() {
       isActive: false,
     });
   }
-  console.log(numbers);
 
   let newNumbers = [];
+  let number = 0;
+
+  // funzione che estrae un numero
   const callNumber = () => {
-    const number = Math.floor(Math.random() * (90 - 1 + 1) + 1);
-    console.log(number);
+    if (calledNumbers.length < 90) {
+      number = Math.floor(Math.random() * (90 - 1 + 1) + 1);
 
-    if (newNumbers.includes(number)) callNumber();
+      // se il numero è già stato estratto allora:
+      if (calledNumbers.includes(number)) {
+        console.log(
+          `Il numero ${number} è già stato estratto, estraggo un altro numero...`
+        );
+        callNumber();
+      }
 
-    newNumbers = [...calledNumbers, number];
+      newNumbers = [...calledNumbers, number];
 
-    setCalledNumbers(newNumbers);
-    console.log(newNumbers);
+      setCalledNumbers(newNumbers);
+      console.log(newNumbers);
+    }
   };
 
   const [calledNumbers, setCalledNumbers] = useState([]);
 
   return (
     <>
-      <div className="container">
-        <h1 className="m-3 p-3 d-inline-block">Tombola</h1>
-        <div className="d-flex">
-          <div className="d-flex flex-wrap">
+      <div className="container  p-5 mt-5">
+        <h1 className=" mb-3 p-3 d-inline-block">
+          Il gioco della <i>Tombola</i>
+        </h1>
+        <div className="row">
+          <div className="col-8 d-flex flex-wrap">
             {numbers.map((number) => {
               return (
                 <span
                   key={number.value}
-                  className={`number-container ${
-                    calledNumbers.includes(number.value) ? "text-bg-dark" : ""
+                  className={`number-container rounded ${
+                    calledNumbers.includes(number.value)
+                      ? "text-bg-info border"
+                      : ""
                   }`}
                 >
                   {number.value}
@@ -44,10 +57,27 @@ function App() {
               );
             })}
           </div>
-          <div>
-            <button onClick={callNumber} className="btn btn-primary">
-              Chiama numero
-            </button>
+          <div className="col-4 mt-2">
+            <h2>
+              {calledNumbers.length > 0 ? (
+                <span>
+                  {" "}
+                  E' stato estratto il numero{" "}
+                  <i>{calledNumbers[calledNumbers.length - 1]}</i>
+                </span>
+              ) : (
+                "Chiama un numero per iniziare la partita!"
+              )}
+            </h2>
+            {calledNumbers.length < 90 ? (
+              <button onClick={callNumber} className="btn btn-primary mt-3">
+                <i className="text-light">Chiama numero</i>
+              </button>
+            ) : (
+              <h2 className="mt-5">
+                <i>Comlpimenti, hai vinto!</i>
+              </h2>
+            )}
           </div>
         </div>
       </div>

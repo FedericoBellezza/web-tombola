@@ -3,7 +3,16 @@
   width: 50px;
   text-align: center;
   line-height: 50px;
-  border: 1px solid black;
-
+  border: 1px dashed grey;
+  transition: all 0.3s ease-in-out;
   margin: 10px;
+}
+
+i {
+  color: rgb(23, 193, 250);
+  font-weight: 900;
+}
+
+.btn {
+  font-size: 1.3rem !important;
 }
